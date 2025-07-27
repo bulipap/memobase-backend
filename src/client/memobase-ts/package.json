@@ -3,15 +3,14 @@
   "version": "0.0.18",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "test": "jest",
     "prepare": "chmod -R +x ./scripts/ && npm run build",
     "lint": "./scripts/lint",
-    "fix": "./scripts/format"
+    "fix": "./scripts/format",
+    "start": "node dist/index.js"
   },
   "keywords": [
     "retrieval",
@@ -24,9 +23,12 @@
   "author": "Memobase <contact@memobase.io>",
   "license": "Apache-2.0",
   "description": "Client SDK for Memobase",
+  "dependencies": {
+    "zod": "^3.25.64",
+    "@types/node": "^24.0.1"
+  },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@types/node": "^24.0.1",
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
     "eslint": "^9.28.0",
@@ -45,8 +47,5 @@
   "bugs": {
     "url": "https://github.com/memodb-io/memobase/issues"
   },
-  "homepage": "https://github.com/memodb-io/memobase#readme",
-  "dependencies": {
-    "zod": "^3.25.64"
-  }
+  "homepage": "https://github.com/memodb-io/memobase#readme"
 }
