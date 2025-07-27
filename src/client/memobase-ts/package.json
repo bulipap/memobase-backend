@@ -12,20 +12,11 @@
     "fix": "./scripts/format",
     "start": "node dist/index.js"
   },
-  "keywords": [
-    "retrieval",
-    "memory",
-    "rag",
-    "chatgpt",
-    "llm-application",
-    "user-memory"
-  ],
-  "author": "Memobase <contact@memobase.io>",
-  "license": "Apache-2.0",
-  "description": "Client SDK for Memobase",
   "dependencies": {
     "zod": "^3.25.64",
     "@types/node": "^24.0.1",
+    "@types/express": "^4.17.17",
+    "@types/cors": "^2.8.12",
     "express": "^4.18.2",
     "cors": "^2.8.5"
   },
