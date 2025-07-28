@@ -12,7 +12,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": []  // ✅ Prevents trying to load all @types/* packages
+    "types": ["node", "express", "cors", "jest"]
   },
   "include": [
     "index.ts",
@@ -20,7 +20,6 @@
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "tests/**/*"
+    "dist"
   ]
 }
