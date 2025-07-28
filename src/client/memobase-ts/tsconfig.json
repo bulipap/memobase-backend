@@ -11,12 +11,12 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"]
-    },
-    "types": ["node", "express", "cors", "jest"]
+    }
   },
   "include": [
     "index.ts",
-    "src/**/*"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",
