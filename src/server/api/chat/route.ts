@@ -7,32 +7,43 @@ import { memoBaseClient } from "@/utils/memobase/client";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-  const staticUserId = process.env.STATIC_USER_ID;
-  if (!staticUserId) {
-    console.error("Missing STATIC_USER_ID");
-    return new Response("Missing STATIC_USER_ID", { status: 500 });
-  }
-
-  if (!process.env.OPENAI_API_KEY) {
-    console.error("Missing OPENAI_API_KEY");
-    return new Response("Missing OPENAI_API_KEY", { status: 500 });
-  }
-
   try {
+    console.log("✅ POST /api/chat triggered");
+
+    const staticUserId = process.env.STATIC_USER_ID;
+    if (!staticUserId) throw new Error("Missing STATIC_USER_ID");
+
+    const openaiKey = process.env.OPENAI_API_KEY;
+    if (!openaiKey) throw new Error("Missing OPENAI_API_KEY");
+
+    const model = process.env.OPENAI_MODEL;
+    if (!model) throw new Error("Missing OPENAI_MODEL");
+
+    const body = await req.json();
+    const { messages, tools } = body;
+    console.log("📥 Request body parsed:", JSON.stringify(body, null, 2));
+
     const user = await memoBaseClient.getOrCreateUser(staticUserId);
     const context = await user.context(750);
-    const { messages, tools } = await req.json();
+    console.log("🧠 Retrieved context memory");
 
     const result = await streamText({
-      model: openai(process.env.OPENAI_MODEL!),
+      model: openai(model),
       messages,
-      system: `You're Memobase Assistant. Use the memory below:\n${context}`,
+      system: `You're Memobase Assistant. Use memory below:\n${context}`,
       tools,
     });
 
     return result;
-  } catch (err) {
-    console.error("Chat route error:", err);
-    return new Response("Internal Server Error", { status: 500 });
+  } catch (err: any) {
+    console.error("❌ Error in /api/chat:", err);
+    return new Response(
+      JSON.stringify({ error: err.message || "Internal Server Error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
+}
+
+export async function GET() {
+  return new Response("Only POST is supported", { status: 405 });
 }
