@@ -17,9 +17,10 @@ app.get('/', (req, res) => {
   res.send('🧠 Memobase backend is running!');
 });
 
-// ✅ Bind to the correct port for Render with proper TypeScript typing
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+// ✅ Bind to the correct port for Render (no fallback!)
+const port = process.env.PORT;
+if (!port) throw new Error('❌ Missing PORT environment variable');
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(Number(port), '0.0.0.0', () => {
   console.log(`✅ Server listening on port ${port}`);
 });
