@@ -2,6 +2,9 @@
   "name": "@memobase/memobase",
   "version": "0.0.18",
   "main": "dist/index.js",
+  "workspaces": [
+    "src/client/memobase-ts"
+  ],
   "types": "dist/index.d.ts",
   "files": [
     "dist"
