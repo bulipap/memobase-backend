@@ -11,12 +11,12 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "types": []  // ✅ Prevents trying to load all @types/* packages
   },
   "include": [
     "index.ts",
-    "src/**/*",
-    "tests/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
