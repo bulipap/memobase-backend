@@ -20,14 +20,6 @@ app.get('/', (req, res) => {
 // ✅ Bind to the correct port for Render with proper TypeScript typing
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-app.listen(port, '0.0.0.0', async () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`✅ Server listening on port ${port}`);
-
-  // ✅ Start Memobase server instance with injected config
-  const { createMemoBaseServer } = await import('./src/server');
-  await createMemoBaseServer({
-    config: {
-      apiKey: process.env.MEMOBASE_API_KEY ?? 'emanuel-secret-key',
-    },
-  });
 });
