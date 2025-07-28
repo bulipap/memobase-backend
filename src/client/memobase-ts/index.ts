@@ -9,8 +9,11 @@ export * from './src/types';
 // 🚀 Express server
 const app = express();
 
-// ✅ Enable CORS (optional: adjust allowed origins as needed)
-app.use(cors());
+// ✅ Enable CORS for your frontend (with credentials support)
+app.use(cors({
+  origin: "https://emanuel-memory.onrender.com", // frontend URL
+  credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {

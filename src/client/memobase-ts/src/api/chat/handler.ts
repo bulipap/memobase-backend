@@ -6,6 +6,7 @@ import { memoBaseClient } from "@/utils/memobase/client";
 export async function chatHandler(req: Request, res: Response) {
   try {
     console.log("✅ POST /api/chat triggered");
+    console.log("🔧 Incoming /api/chat request:", req.body); // 👈 Added debug log
 
     const staticUserId = process.env.STATIC_USER_ID;
     if (!staticUserId) throw new Error("Missing STATIC_USER_ID");
@@ -29,7 +30,6 @@ export async function chatHandler(req: Request, res: Response) {
     for (;;) {
       const { done, value } = await reader.read();
       if (done || value === undefined) break;
-      // 'value' is already a string per SDK spec, no cast needed
       res.write(value, "utf8");
     }
 
